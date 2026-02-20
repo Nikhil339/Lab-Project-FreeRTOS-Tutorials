@@ -77,6 +77,7 @@ int main( void )
      * Assign the return value to xQueue.
      */
 
+	xQueue = xQueueCreate()
     configASSERT( xQueue != NULL );
 
     /* Start the scheduler. */

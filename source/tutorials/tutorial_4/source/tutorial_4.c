@@ -57,6 +57,9 @@ int main( void )
      *
      * Assign the return value to xTaskCreationResult.
      */
+
+	xTaskCreationResult = xTaskCreate(prvHighPriorityTaskFunction, "High", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
+	
     configASSERT( xTaskCreationResult == pdPASS );
 
     /* TODO 2 - Create a FreeRTOS task using xTaskCreate API which
@@ -72,6 +75,9 @@ int main( void )
      *
      * Assign the return value to xTaskCreationResult.
      */
+
+	xTaskCreationResult = xTaskCreate(prvLowPriorityTaskFunction, "Low", configMINIMAL_STACK_SIZE, NULL, 0, NULL);
+  	
     configASSERT( xTaskCreationResult == pdPASS );
 
     /* Start the scheduler. */

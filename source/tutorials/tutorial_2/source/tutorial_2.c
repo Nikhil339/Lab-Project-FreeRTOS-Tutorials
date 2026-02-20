@@ -57,10 +57,14 @@ int main( void )
      * Assign the return value to xTaskCreationResult.
      */
 
+    xTaskCreationResult = xTaskCreate(prvTaskFunction, "Task", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL);
+
     configASSERT( xTaskCreationResult == pdPASS );
 
     /* TODO 2 - Call vTaskStartScheduler to start the scheduler. */
-
+	
+	vTaskStartScheduler();
+		
     /* Should not reach here. */
     for( ;; )
     {
