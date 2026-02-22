@@ -77,7 +77,7 @@ int main( void )
      * Assign the return value to xQueue.
      */
 
-	xQueue = xQueueCreate()
+	xQueue = xQueueCreate(5, sizeof(UBaseType_t));
     configASSERT( xQueue != NULL );
 
     /* Start the scheduler. */
@@ -115,6 +115,8 @@ static void prvSenderTask( void * pvParams )
          *
          * Assign the return value to xQueueSendResult.
          */
+         
+         xQueueSendResult = xQueueSendToFront(xQueue, &(uxValueToSend), portMAX_DELAY);
 
         configASSERT( xQueueSendResult == pdPASS );
 
@@ -140,6 +142,7 @@ static void prvReceiverTask( void * pvParams )
          * xTicksToWait     portMAX_DELAY
          */
 
+         xQueueReceive(xQueue, &(uxReceivedValue), portMAX_DELAY);
 
         fprintf( stderr, "Value received from the queue: %lu\r\n", uxReceivedValue );
         fprintf( stderr, "Number of items in the queue: %lu.\r\n", uxQueueMessagesWaiting( xQueue ) );
